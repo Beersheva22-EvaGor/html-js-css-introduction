@@ -1,0 +1,37 @@
+a {
+    text-decoration: none;
+}
+
+
+.transparent {
+    background-color: rgba(255, 255, 255, 0.76);
+    padding: 10px;
+}
+
+.link-image {
+    width: 7%;
+    vertical-align: middle;
+    border-radius: 10%;
+}
+
+.link-label {
+    font-size: large;
+    width: 50rem;
+    display: inline-block;
+    text-align: left;
+    margin-left: 1em;
+    font-weight: bold;
+}
+
+.link {
+    display: block;
+    text-align: center;
+    width: 100em;
+    display: inline-block;
+}
+
+body {
+    background-color: powderblue;
+    background-size: cover;
+}
+
