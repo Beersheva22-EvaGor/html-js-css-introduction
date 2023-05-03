@@ -5,13 +5,16 @@ a {
 
 .transparent {
     background-color: rgba(255, 255, 255, 0.76);
-    padding: 10px;
+    padding: 10%;
+    flex-direction: column;
+    align-items: center;
 }
 
 .link-image {
     width: 7%;
     vertical-align: middle;
     border-radius: 10%;
+    scroll-behavior: auto;
 }
 
 .link-label {
@@ -21,17 +24,14 @@ a {
     text-align: left;
     margin-left: 1em;
     font-weight: bold;
+    overflow: auto;
 }
 
 .link {
-    display: block;
-    text-align: center;
     width: 100em;
-    display: inline-block;
+    justify-content: center;
 }
 
 body {
-    background-color: powderblue;
     background-size: cover;
 }
-
