@@ -42,6 +42,11 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: 5s;
+}
+.is-point{
+    transform: scale(0.001);
+    /* transition: 0s; */
 }
 .details-image {
     width: 65vw;
@@ -103,6 +108,26 @@ main {
     height: var(--thumbnails-title-height)
 
 }
+.hidden .details-section{
+    display: none;
+}
+.hidden .thumbnails-list{
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: start;
+}
+
+.hidden .thumbnails-item{
+    margin: 10px;
+}
+
+.hide-button{
+    font-size: 1.5em;
+    position: absolute;
+    top: 4vh;
+    right: 5vw;
+    background-color: transparent;
+}
 @media (min-width: 650px) {
     :root {
         --thumbnails-img-width: 12vw;
@@ -135,8 +160,9 @@ main {
         font-size: 1.3em;
     }
         
-
 }
+
+
 @media(min-width: 1000px) {
     .details-image {
         width: 45vw;
