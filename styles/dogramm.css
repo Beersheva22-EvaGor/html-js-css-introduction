@@ -11,7 +11,19 @@
 :root {
     --thumbnails-img-width: 20vw;
     --thumbnails-img-height: calc(var(--thumbnails-img-width) * 0.79);
-    --thumbnails-title-height: calc(var(--thumbnails-img-height) * 0.3);
+    --thumbnails-title-height: calc(var(--thumbnails-img-height) * 0.3)
+}
+main.hidden {
+    --thumbnails-img-width: 40vw;
+    --thumbnails-img-height: calc(var(--thumbnails-img-width) * 0.79);
+    --thumbnails-title-height: calc(var(--thumbnails-img-height) * 0.3)
+}
+.hidden .thumbnails-title {
+    font-size: 1.5em;
+}
+.hidden .thumbnails-list {
+    margin-top: 16px;
+    max-height: 85vh;
 }
 body {
     display: flex;
@@ -42,11 +54,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 5s;
-}
-.is-point{
-    transform: scale(0.001);
-    /* transition: 0s; */
+    transition: 3s;
 }
 .details-image {
     width: 65vw;
@@ -59,7 +67,7 @@ main {
 .details-title {
     background-color: beige;
     font-style: italic;
-    font-size: 1em;
+    font-size: 2em;
     position: absolute;
     left: -6vw;
     bottom: 2vh;
@@ -108,21 +116,18 @@ main {
     height: var(--thumbnails-title-height)
 
 }
-.hidden .details-section{
+
+.hidden .details-section {
     display: none;
 }
-.hidden .thumbnails-list{
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: start;
-}
 
-.hidden .thumbnails-item{
-    margin: 10px;
-}
+.is-point {
+    transform: scale(0.001);
+    transition: 0s
+   }
 
-.hide-button{
-    font-size: 1.5em;
+.hide-button {
+    font-size: 0.8em;
     position: absolute;
     top: 4vh;
     right: 5vw;
@@ -134,12 +139,24 @@ main {
         --thumbnails-img-height: calc(var(--thumbnails-img-width) * 0.75);
         --thumbnails-title-height: calc(var(--thumbnails-img-height) * 0.25)
     }
-   .thumbnails-list {
+    main.hidden {
+        --thumbnails-img-width: 12vw;
+    }
+    .hidden .thumbnails-title {
+        font-size: 1.2em;
+    }
+    
+    .thumbnails-list {
         flex-wrap: nowrap;
         max-height: 80vh;
         flex-direction: column;
         justify-content: start;
         margin-left:5vw;
+    }
+    .hidden .thumbnails-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
     }
     main {
         flex-direction: row-reverse;
@@ -157,19 +174,38 @@ main {
         overflow: hidden
     }
     .details-title {
-        font-size: 1.3em;
+        font-size: 2em;
     }
         
+
 }
-
-
 @media(min-width: 1000px) {
     .details-image {
         width: 45vw;
         height: 37vw;
         border-radius: 20%;
-    }  
+    } 
+    main.hidden {
+        --thumbnails-img-width: 11vw;
+    } 
     html {
-        font-size: 1.5rem
+        font-size: 2rem
     }
+    .hidden .thumbnails-title {
+        font-size: 0.9em;
+    }
+    .thumbnails-title {
+        font-size: 0.8em;
+    }
+    .hidden .thumbnails-list {
+       max-height: 90vh;
+       margin-top: 10vh;
+        
+    }
+   .hidden .thumbnails-item:hover {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+   
 }
