@@ -175,5 +175,5 @@
 // const minMax = ar => ar.reduce((accumulator, current) => { return [Math.min(accumulator[0], current), Math.max(accumulator[1], current)] }, [ar[0], ar[0]]);
 // console.log(minMax(array));
 
-let array = [10, 20, -70, 100, 6 , -10, 0];
-console.log(array.sort());
+let array = [10, 20, -70, 100, 6 , -10, 0, '12'];
+console.log(array.sort((a,b) => a- b));
