@@ -1,0 +1,18 @@
+.div-square{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: solid 0.5px black;
+}
+.color-white{
+    background: white;
+}
+
+.color-black{
+    background: black;
+}
+
+li{
+    display: flex;
+    justify-content: center;
+}
