@@ -5,11 +5,9 @@ const detailsSection = document.querySelector(".details-section");
 const mainSection = document.querySelector("main");
 const HIDDEN = "hidden";
 const POINT = "is-point";
-for (let i = 0; i < thumbnailsAnchors.length; i++){
-    thumbnailsAnchors[i].addEventListener("click", function(){
-        setDetails(thumbnailsAnchors[i]);
-    });
-}
+
+thumbnailsAnchors.forEach(anchor => anchor.addEventListener('click', 
+setDetails.bind(undefined, anchor)))
 
 function setDetails(anchor){
     showDetails();
