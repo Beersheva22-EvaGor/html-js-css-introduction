@@ -1,50 +1,46 @@
-this.x = 100;
-// console.log(this);
-function f1(){
-    return this;
+
+// Array.prototype.map = function (){
+//     return 'kuku';
+// }
+// console.log([1, 2, 3].map());
+
+//signon hadash
+class Rectangle {
+    #width; //private
+    #height;
+    constructor(width, height) {
+        this.#width = width;
+        this.#height = height;
+        this.perimeter = function () {
+            return 2 * (this.#width + this.#height);
+        };
+    }
+    perimeter(){
+        return 2*(this.#width + this.#height);
+    }
+    square() {
+        return this.#width * this.#height;
+    }
+};
+
+const rectangle = new Rectangle(3, 4);   
+console.log(rectangle.perimeter());
+
+class Square extends Rectangle{
+    constructor (width){
+        super(width, width);
+    }
 }
 
-const f2 = () =>{
+console.log(new Square(12).perimeter());
+
+
+Array.prototype.forEach = function(f){
+    for (let i = 0; i< this.length; i++){
+       this[i] = f(this[i]);
+
+    }
     return this;
 };
 
-// // console.log('f1 = ', f1());
-// // console.log('f2 =', f2());
-// // console.log((() =>{
-// //     console.log(this);
-// // })());
-// const x = {f1: function(){
-//     return this;
-// }, f2: ()=> this};
-// console.log('x.f1 calls result ', x.f1());
-// console.log('x.f2 calls result ', x.f2());
-
-const rectangle1 = {width: 20, height: 20, square: function(){
-    return this.width * this.height
-}, perimeter: function () {return (this.width + this.height)*2}};
-
-const rectangle2 = {height: 20, width: 20, square: function(){
-    return this.width * this.height
-}, perimeter: () => (this.width + this.height)*2};
-console.log(`square = ${rectangle1.square()}`);
-console.log(`permiter = ${rectangle1.perimeter()}`);
-
-
-const point = {x: 3, y: 4};
-function displayPoint(z, t){
-console.log(`x = ${this.x}, y = ${this.y}, z = ${z}, t = ${t}`);
-}
-
-const d1 = displayPoint.bind(point, 200, 300);
-d1.call();
-
-displayPoint.apply(point, [300, 400]);
-
-console.log(JSON.stringify(rectangle1) == JSON.stringify(rectangle2));
-
-//to create deep copy object
-const rectangle = JSON.parse(JSON.stringify(rectangle1));
-//on another hand shallow copy:
-const rectangle3 = {...rectangle};
-console.log(s);
-
+[1,2,3].forEach(x => console.log(x));
