@@ -1,46 +1,55 @@
 
-// Array.prototype.map = function (){
-//     return 'kuku';
-// }
-// console.log([1, 2, 3].map());
-
-//signon hadash
-class Rectangle {
-    #width; //private
-    #height;
-    constructor(width, height) {
-        this.#width = width;
-        this.#height = height;
-        this.perimeter = function () {
-            return 2 * (this.#width + this.#height);
-        };
-    }
-    perimeter(){
-        return 2*(this.#width + this.#height);
-    }
-    square() {
-        return this.#width * this.#height;
+Array.prototype.myforEach = function (f) {
+    for (let i = 0; i < this.length; i++) {
+        this[i] = f(this[i], i, this);
     }
 };
+//test
+[1, 2, 3].myforEach(x => console.log(x));
 
-const rectangle = new Rectangle(3, 4);   
-console.log(rectangle.perimeter());
+Array.prototype.myfilter = function (f) {
+    let res = [];
+    this.forEach((v, k) => res.push(f(v, k, this)));
+    return res;
+}
+//test
+console.log([1, 2, 3].myfilter(x => x % 2 == 0));
 
-class Square extends Rectangle{
-    constructor (width){
-        super(width, width);
+Array.prototype.mymap = function (f) {
+    for (let i = 0; i < this.length; i++)
+        this[i] = f(this[i], i, this);
+    return this;
+}
+//test
+console.log([1, 2, 3].mymap(x => x ** 3));
+
+Array.prototype.myReduce = function (f, first) {
+    let acc = first ? f(first, this[0], 0, this) : this[0];
+    for (let i = 1; i < this.length; i++) {
+        acc = f(acc, this[i], i,this);
+    }
+    return acc;
+}
+//test
+console.log([1, 2, 3, 4].myReduce((acc, curr) => { return acc + curr }));
+console.log([1, 2, 3, 4].myReduce((acc, curr) => { return acc + curr }, 1));
+
+////////////
+
+class Deferred {
+    #ar=[];
+    constructor() {
+    }
+    then(f) {
+        this.#ar.push(f);
+    }
+    resolve(s) {this.#ar.forEach(f => s = f(s));
     }
 }
+const d = new Deferred();
+d.then(function(res){ console.log("1 ", res); return "a"; });
 
-console.log(new Square(12).perimeter());
+d.then(function(res){ console.log("2 ", res); return "b"; });
 
-
-Array.prototype.forEach = function(f){
-    for (let i = 0; i< this.length; i++){
-       this[i] = f(this[i]);
-
-    }
-    return this;
-};
-
-[1,2,3].forEach(x => console.log(x));
+d.then(function(res){ console.log("3 ", res); return "c"; });
+d.resolve('hello');
