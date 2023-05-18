@@ -46,7 +46,7 @@ main {
 }
 .is-point{
     transform: scale(0.001);
-    /* transition: 0s; */
+    transition: 0s;
 }
 .details-image {
     width: 65vw;
@@ -128,6 +128,10 @@ main {
     right: 5vw;
     background-color: transparent;
 }
+.more{
+    display: inline;
+}
+
 @media (min-width: 650px) {
     :root {
         --thumbnails-img-width: 12vw;

@@ -5,155 +5,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dogram</title>
-    <link rel="stylesheet" type="text/css" href="styles/dogramm.css">
-    <link rel="shotcut icon" href="images/dogs/favicon.png">
+    <title>MOVIES</title>
+    <link rel="stylesheet" type="text/css" href="styles/movies.css">
+    <link rel="shotcut icon" href="images/movies/theatre-mask.png">
 </head>
 
 <body>
     <header>
-        <h3 class="logo">Dogram</h3>
+        <h3 class="logo">MOVIES</h3>
     </header>
     <main class="hidden">
         <section class="details-section">
             <div class="details-container">
-                <img src="images/dogs/1.webp" class="details-image">
-                <span class="details-title">
-                    Sweetiest puppy
-                </span>
+                <img src="" class="details-image">
+                <span class="details-title"></span>
                 <button onclick="hideDetails()" class="hide-button">X</button>
             </div>
         </section>
         <section class="thumbnails-section">
             <ul class="thumbnails-list">
-                <li class="thumbnails-item">
-                    <a href="#" class="thumbnails-anchor" data-details-image="images/dogs/1.webp" data-details-text="The most beautiful puppy">
-                        <img src="images/dogs/1.webp" class="thumbnails-image">
-                        <span class="thumbnails-title">Buba</span>
-                    </a>
-                </li>
 
-                <li class="thumbnails-item">
-                    <a href="#" class="thumbnails-anchor" data-details-image="images/dogs/2.webp"data-details-text="Stares at you while sleeping">
-                        <img src="images/dogs/2.webp" class="thumbnails-image">
-                        <span class="thumbnails-title">Charlie</span>
-                    </a>
-                </li>
-
-                <li class="thumbnails-item">
-                    <a href="#" class="thumbnails-anchor" data-details-image="images/dogs/3.webp"data-details-text="Loves sleepning">
-                        <img src="images/dogs/3.webp" class="thumbnails-image">
-                        <span class="thumbnails-title">Foggy</span>
-                    </a>
-                </li>
-
-                <li class="thumbnails-item">
-                    <a href="#" class="thumbnails-anchor" data-details-image="images/dogs/4.webp"data-details-text="Fluffy">
-                        <img src="images/dogs/4.webp" class="thumbnails-image">
-                        <span class="thumbnails-title">Funny</span>
-                    </a>
-                </li>
-
-                <li class="thumbnails-item">
-                    <a href="#" class="thumbnails-anchor" data-details-image="images/dogs/5.webp" data-details-text="Gunman">
-                        <img src="images/dogs/5.webp" class="thumbnails-image">
-                        <span class="thumbnails-title">Doggy</span>
-                    </a>
-                </li>
-                
-                <li class="thumbnails-item">
-                    <a href="#" class="thumbnails-anchor" data-details-image="images/dogs/1.webp"data-details-text="Bandit">
-                        <img src="images/dogs/1.webp" class="thumbnails-image">
-                        <span class="thumbnails-title">Super dog</span>
-                    </a>
-                </li>
-
-                <li class="thumbnails-item">
-                    <a href="#" class="thumbnails-anchor" data-details-image="images/dogs/2.webp"data-details-text="The cutties puppy">
-                        <img src="images/dogs/2.webp" class="thumbnails-image">
-                        <span class="thumbnails-title">Kitten</span>
-                    </a>
-                </li>
-
-                <li class="thumbnails-item">
-                    <a href="#" class="thumbnails-anchor" data-details-image="images/dogs/3.webp" data-details-text="Just cute">
-                        <img src="images/dogs/3.webp" class="thumbnails-image">
-                        <span class="thumbnails-title">Kelly</span>
-                    </a>
-                </li>
-
-                <li class="thumbnails-item">
-                    <a href="#" class="thumbnails-anchor" data-details-image="images/dogs/4.webp"data-details-text="Never gives up">
-                        <img src="images/dogs/4.webp" class="thumbnails-image">
-                        <span class="thumbnails-title">Biggy</span>
-                    </a>
-                </li>
-
-                <li class="thumbnails-item">
-                    <a href="#" class="thumbnails-anchor" data-details-image="images/dogs/5.webp"data-details-text="Always fun">
-                        <img src="images/dogs/5.webp" class="thumbnails-image">
-                        <span class="thumbnails-title">Funniest</span>
-                    </a>
-                </li>
-
-                <li class="thumbnails-item">
-                    <a href="#" class="thumbnails-anchor" data-details-image="images/dogs/1.webp"data-details-text="Loves kittens">
-                        <img src="images/dogs/1.webp"class="thumbnails-image">
-                        <span class="thumbnails-title">Bippy</span>
-                    </a>
-                </li>
-
-                <li class="thumbnails-item">
-                    <a href="#" class="thumbnails-anchor" data-details-image="images/dogs/2.webp"data-details-text="The saddiest puppy">
-                        <img src="images/dogs/2.webp"class="thumbnails-image">
-                        <span class="thumbnails-title">Dippy</span>
-                    </a>
-                </li>
-
-                <li class="thumbnails-item">
-                    <a href="#" class="thumbnails-anchor" data-details-image="images/dogs/3.webp"data-details-text="The most bigheaded puppy">
-                        <img src="images/dogs/3.webp"class="thumbnails-image">
-                        <span class="thumbnails-title">Bobby</span>
-                    </a>
-                </li>
-
-                <li class="thumbnails-item">
-                    <a href="#" class="thumbnails-anchor" data-details-image="images/dogs/4.webp"data-details-text="The cleverest puppy">
-                        <img src="images/dogs/4.webp"class="thumbnails-image">
-                        <span class="thumbnails-title">Tobby</span>
-                    </a>
-                </li>
-
-                <li class="thumbnails-item">
-                    <a href="#" class="thumbnails-anchor" data-details-image="images/dogs/5.webp"data-details-text="The calmiest puppy">
-                        <img src="images/dogs/5.webp"class="thumbnails-image">
-                        <span class="thumbnails-title">Pixie</span>
-                    </a>
-                </li>
-                <li class="thumbnails-item">
-                    <a href="#" class="thumbnails-anchor" data-details-image="images/dogs/3.webp"data-details-text="The most serious puppy">
-                        <img src="images/dogs/3.webp"class="thumbnails-image">
-                        <span class="thumbnails-title">Fixick</span>
-                    </a>
-                </li>
-
-                <li class="thumbnails-item">
-                    <a href="#" class="thumbnails-anchor" data-details-image="images/dogs/4.webp"data-details-text="The prettiest puppy">
-                        <img src="images/dogs/4.webp"class="thumbnails-image">
-                        <span class="thumbnails-title">Pixick</span>
-                    </a>
-                </li>
-
-                <li class="thumbnails-item">
-                    <a href="#" class="thumbnails-anchor" data-details-image="images/dogs/5.webp"data-details-text="The most funny puppy">
-                        <img src="images/dogs/5.webp"class="thumbnails-image">
-                        <span class="thumbnails-title">Tinny</span>
-                    </a>
-                </li>
             </ul>
         </section>
     </main>
-<script src="src/dogs.js"></script>
+    <script type="module" src="src/movies.js"></script>
 
 </body>
 
