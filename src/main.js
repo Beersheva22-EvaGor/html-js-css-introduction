@@ -8,7 +8,7 @@ const columns = [
     { field: 'date', headerName: 'Date' },
     { field: 'time', headerName: 'Time' },
     { field: 'temperature', headerName: 'Temperature' },
-    { field: 'apparentTemperature', headerName: 'Fealt Temp' }
+    { field: 'apparent_temperature', headerName: 'Fealt Temp' }
 ]
 
 //objects
