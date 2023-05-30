@@ -1,11 +1,7 @@
 {
-    "baseUrl": "https://api.open-meteo.com/v1/gfs?",
-    "maxDays": 16,
-    "cities": {
-        "Rehovot": {"lat": 31.89, "long": 34.81},
-        "Jerusalem": {"lat": 31.77, "long": 35.22},
-        "Beersheba": {"lat": 31.25, "long": 34.79},
-        "Haifa": {"lat": 32.82, "long": 34.99},
-        "Tel_Aviv": {"lat": 32.08, "long": 34.78}
-    }
+    "minAge": 18,
+    "maxAge": 80,
+    "minSalary": 5000,
+    "maxSalary": 100000,
+    "departments": ["QA", "Development", "Audit", "Accounting", "Management"]
 }

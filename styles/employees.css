@@ -1,0 +1,16 @@
+.menu-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .active {
+    color: white;
+    background-color: blue;
+  }
+  #statistics-place{
+    /* background-color: rgba(127, 255, 212, 0.39); */
+    padding: 10px;
+  }
+  table{
+    box-shadow: 5px 5px 10px 1px #000;
+  }
