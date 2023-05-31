@@ -6,7 +6,6 @@ export default class DataGrid {
         // headerName: <column name>}
         this.#keys = columns.map(c => c.field);
         this.#buildTableHeader(parentId, columns.map(c => c.headerName))
-
     }
     fillData(rowsData) {
         this.#tBodyElement.innerHTML = rowsData.map(rd => this.#getRow(rd)).join('');
@@ -17,18 +16,27 @@ export default class DataGrid {
                  </tr>  `
     }
     insertRow(obj) {
-        this.#tBodyElement.innerHTML += this.#getRow(obj)
+        this.#tBodyElement.innerHTML += this.#getRow(obj);
     }
+    
     #buildTableHeader(parentId, columnNames) {
         const tableSectionElement = document.getElementById(parentId);
-        tableSectionElement.innerHTML +=
-            `<table><thead>
-               <tr>
+        tableSectionElement.innerHTML =
+            `<div class="wrap-table">
+            <table>
+            <thead >
+               <tr style="position:fixed; width:100%">
                    ${columnNames.map(headerName => `<th>${headerName}</th>`).join('')}
                </tr>
+               <tr style="visibility: hidden">${columnNames.map(headerName => `<th>${headerName}</th>`).join('')}</tr>
             </thead>
             <tbody id="${parentId}-table" >
-            </tbody></table>`;
-        this.#tBodyElement = document.getElementById(`${parentId}-table`);
+            <tr></tr>
+            </tbody>
+          </table>
+          </div>`
+        this.#tBodyElement = document.getElementById(parentId + "-table");
+
+    
     }
 }

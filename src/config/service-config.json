@@ -1,7 +1,0 @@
-{
-    "minAge": 18,
-    "maxAge": 80,
-    "minSalary": 5000,
-    "maxSalary": 100000,
-    "departments": ["QA", "Development", "Audit", "Accounting", "Management"]
-}
