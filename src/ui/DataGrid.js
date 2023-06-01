@@ -1,11 +1,13 @@
 export default class DataGrid {
     #tBodyElement
     #keys
+    #parentId
     constructor(parentId, columns) {
         //columns - array of objects {field: <name of key>,
         // headerName: <column name>}
         this.#keys = columns.map(c => c.field);
-        this.#buildTableHeader(parentId, columns.map(c => c.headerName))
+        this.#buildTableHeader(parentId, columns.map(c => c.headerName));
+        this.#parentId = parentId;
     }
     fillData(rowsData) {
         this.#tBodyElement.innerHTML = rowsData.map(rd => this.#getRow(rd)).join('');
@@ -26,7 +28,8 @@ export default class DataGrid {
             <table>
             <thead >
                <tr style="position:fixed; width:100%">
-                   ${columnNames.map(headerName => `<th>${headerName}</th>`).join('')}
+                   ${columnNames.map(headerName => 
+                    `<th>${headerName}</th>`).join('')}
                </tr>
                <tr style="visibility: hidden">${columnNames.map(headerName => `<th>${headerName}</th>`).join('')}</tr>
             </thead>
@@ -39,4 +42,7 @@ export default class DataGrid {
 
     
     }
+    // addHeaderHandler(headerName, func){
+    //     document.getElementById(`${this.#parentId}-${headerName}`).onclick = ()=> func(headerName);
+    // }
 }

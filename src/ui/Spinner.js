@@ -1,36 +1,25 @@
 export default class Spinner {
-    #parentId;
-    #spinnerElement;
-    #parentElement;
+    #spinnerElement
+    #coverElement
     constructor(parentId) {
-        this.#parentId = parentId;
-        this.#parentElement = document.getElementById(parentId);
-        this.#buildHTML();
-    }
-    start() {
-        this.#parentElement.appendChild(this.#spinnerElement);
-    }
-    stop() {
-        try {
-            document.getElementById(`${this.#parentId}-container-spinner-animation`).remove();
-        } catch (err) {
-            console.log(err, this.#parentId);
-        }
-    }
-    #buildHTML() {
-        const str = `
+        const parentElement = document.getElementById(parentId);
+        parentElement.innerHTML = `<div class="spinner" hidden>
         <div class="circle1">
         </div>
         <div class="circle2">
         </div>
         <div class="circle3">
         </div>
-      `;
-        this.#spinnerElement = document.createElement("div");
-        this.#spinnerElement.setAttribute('id', `${this.#parentId}-container-spinner-animation`);
-        this.#spinnerElement.setAttribute('class', 'spinner-animation');
-        this.#spinnerElement.innerHTML = str;   
+      </div>`;
+        this.#spinnerElement = parentElement.childNodes[0];
+        this.#coverElement = document.getElementById('cover');
     }
-
-
+    start() {
+        document.getElementById('cover').hidden = false;
+        this.#spinnerElement.hidden = false;
+    }
+    stop() {
+        document.getElementById('cover').hidden = true;
+        this.#spinnerElement.hidden = true;
+    }
 }
