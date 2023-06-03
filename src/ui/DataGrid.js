@@ -17,6 +17,7 @@ export default class DataGrid {
         this.#rowIndex = 0;
         this.#tBodyElement.innerHTML = '';
         rowsData.forEach(rd => this.insertRow(rd));
+
     }
 
     insertRow(obj) {

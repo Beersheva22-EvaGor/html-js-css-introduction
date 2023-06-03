@@ -11,9 +11,13 @@ export function count(array, field, interval) {
     }, {});
 }
 export function orderObjByField(obj, field, isAsc) {
-    //return Object.values(obj).sort((e1, e2) => isAsc?(e2.field > e1.field ? 1 : -1) : (e1.field > e2.field ? 1 : -1));
     return Object.values(obj).sort((e1, e2) => compare(e1, e2, field, isAsc))
 }
 function compare(e1, e2, field, isAsc) {
     return isAsc ? (e2[field] > e1[field] ? 1 : -1) : (e1[field] > e2[field] ? 1 : -1);
 }
+
+export function filterByStr(obj, field, pattern){
+    return Object.values(obj).filter(o=> (o[field]+"").toLowerCase().includes(pattern.toLowerCase()));
+}
+

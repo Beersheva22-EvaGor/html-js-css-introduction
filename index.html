@@ -20,20 +20,26 @@
 
     </section>
     <section id="employees-table" hidden>
-        <div id = "employees-update"></div>
-        <div class="buttons-employee-table">
-            <button id ="remove-employee">Remove</button>
-            <button id ="update-employee">Update</button>
+        <div id="employees-update"></div>
+        <div class="forms-employee-table">
+            <div class="inline-form">
+                <button id="remove-employee">Remove</button>
+                <button id="update-employee">Update</button>
+            </div>
+            <form class="inline-form" id="find-form-place"></form>
         </div>
         <div id="employees-table-place"></div>
+        <label id="summary"> </label>
     </section>
     <section id="statistics-place" hidden>
+        <label>Age statistics</label>
         <div id="age-statistics-place"></div>
-        <div id="salary-statistics-place" style="margin-top: 4vh;"></div>
+        <label style="margin-top: 4vh;">Salary statistics</label>
+        <div id="salary-statistics-place"></div>
     </section>
     <div id="spinner-place"></div>
 
-    
+
 
     <script src="src/main.js" type="module"></script>
 </body>

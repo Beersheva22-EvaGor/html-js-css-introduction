@@ -3,6 +3,7 @@
   --color-spinner1: white;
   --color-spinner2: rgb(126, 122, 122);
   --color-spinner3: rgb(216, 216, 216);
+  --table-employess-width: 80vw;
 }
 
 * {
@@ -26,7 +27,7 @@ button{
 .header-order-buttons{
   position: absolute;
   bottom: 0.3rem;
-  margin-left: calc(11vw /2 - 1rem - 0.9rem);
+  margin-left: calc(11vw /2 - 0.9rem);
 
 }
 .header-order-buttons button{
@@ -46,6 +47,7 @@ button{
   left: 0;
   z-index: 50;
   background-color: rgba(59, 58, 58, 0.397);
+  visibility: hidden;
 }
 
 .above {
@@ -93,15 +95,21 @@ button{
 tr:nth-child(even) {
   background: #CCC;
 } 
+
 .form-control {
-  display: flex;
-  flex-direction: column;
-  width: 90vw;
   box-shadow: 5px 5px 5px rgb(139, 173, 168);
   padding: 10px;
   border: 3px solid rgb(139, 173, 168);
 }
 
+.inline-form{
+  margin: 10px;
+}
+
+.forms-employee-table{
+  display: inline-block;
+  text-align: left;
+}
 .row-data {
   display: flex;
   flex-direction: row;
@@ -137,7 +145,7 @@ tr:nth-child(even) {
 }
 
 .wrap-table,
-table,
+.wrap-table table,
 #employees-form-place {
   left: 0;
   right: 0;
@@ -146,36 +154,37 @@ table,
   width: fit-content;
   max-width: 100vw;
 }
+#employees-table-id{
+  max-width: var(--table-employess-width);
+  min-width: var(--table-employess-width);
+}
+
+#statistics-place label{
+  display: block;
+  text-align: center;
+}
 
 th {
   background-color: rgb(166, 204, 207);
   padding-bottom: 2rem;
 }
 
-.buttons-employee-table {
-  display: flex;
-  justify-content: center;
-}
-
-.buttons-employee-table button{
-  margin-bottom: 10px;
-  margin-inline: 5vw;
+#statistics-place th {
+  padding-bottom: 0;
 }
 
 th,
 td {
   padding-inline: 10px;
-  min-width: 11vw;
-  max-width: 11vw;
+   max-width: 12vw;
+   min-width: 12vw;
   overflow: hidden;
 }
 
 .wrap-table {
   max-height: 80vh;
-
   overflow-y: auto;
   overflow-x: hidden;
-
   border: 1.5px solid black;
   box-shadow: 5px 5px 5px rgba(160, 193, 196, 0.822);
   background-color: rgb(240, 238, 238);
@@ -190,6 +199,12 @@ section {
   margin: 10px;
 }
 
+#summary{
+  display: block;
+  text-align: right;
+  margin-right: 10vw;
+  margin-top: 10px;
+}
 
 .spinner-animation {
   position: absolute;
@@ -360,16 +375,18 @@ section {
   }
 }
 
-@media (min-width: 900px) {
-
+@media (min-width: 800px) {
   .form-control {
-    width: 50vw;
+    display: flex;
+    flex-direction: column;
   }
+
 }
 
-@media (min-width: 1600px) {
-
-  .form-control {
-    width: 30vw;
+@media(min-width: 750px){
+  .forms-employee-table{
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
   }
 }

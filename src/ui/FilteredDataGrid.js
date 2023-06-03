@@ -30,9 +30,14 @@ export default class FilteredDataGrid extends DataGrid {
         });
     }
 
+    getTableData(){
+        return this.#objStoreData;
+    }
+
     fillData(rowsData) {
         this.#objStoreData = {};
         super.fillData.bind(this, rowsData)();
+        document.getElementById("summary").innerHTML = `Summary: ${Object.entries(this.#objStoreData).length} employees`;
     }
     insertRow(obj) {
         super.insertRow(obj);

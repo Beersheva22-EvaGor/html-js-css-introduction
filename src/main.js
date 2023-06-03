@@ -5,12 +5,14 @@ import EmployeeForm from "./ui/EmployeeForm.js";
 import { getRandomEmployee } from "./util/random.js";
 import statisticsConfig from "./config/statistics-config.json" assert{type: 'json'}
 import employeesConfig from "./config/employees-config.json" assert{type: 'json'}
-import { range } from "./util/number-functions.js";
+import { range, filterByStr } from "./util/number-functions.js";
 import Spinner from "./ui/Spinner.js";
 import EmployeeTableUpdate from "./ui/EmployeeTableUpdate.js";
+import FindForm from "./ui/FindForm.js";
 
 const N_EMPLOYEES = 50;
 const resultRemove = 'remove';
+const refreshPressed ='refresh';
 const sections = [
     { title: "Employees", id: "employees-table" },
     { title: "Add Employee", id: "employees-form-place" },
@@ -41,6 +43,7 @@ const employeeTable = new FilteredDataGrid("employees-table-place", employeeColu
 const ageStatistics = new FilteredDataGrid("age-statistics-place", statisticsColumns, false);
 const salaryStatistics = new FilteredDataGrid("salary-statistics-place", statisticsColumns, false);
 const updateEmployees = new EmployeeTableUpdate("employees-update", employeesConfig);
+const findForm = new FindForm('find-form-place', employeeColumns.map(f => f.field));
 
 
 employeeForm.addHandler(async (employee) => {
@@ -70,6 +73,8 @@ async function action(serviceFn) {
     spinner.stop();
     return res;
 }
+
+ //Add employees on start
 function createRandomEmployees() {
     const promises = range(0, N_EMPLOYEES).map(() => companyService.addEmployee(getRandomEmployee(minSalary, maxSalary, minYear, maxYear, departments)));
     return Promise.all(promises);
@@ -86,13 +91,13 @@ async function awaitBtnUpdateClicked() {
             // console.log(operation, employee);
             if (operation == resultRemove) {
                 if (updateEmployees.actionRemove(employee)) {
-                    companyService.removeEmployee(employee.id);
+                    await action(companyService.removeEmployee.bind(companyService, employee.id));
                     employeeTable.removeRow(rowElement);
                 }
             } else {
                 let formAnswer = await updateEmployees.actionUpdate(employee);
                 if (formAnswer != false){
-                    companyService.updateEmployee(formAnswer);
+                    await action(companyService.updateEmployee.bind(companyService, formAnswer));
                     employeeTable.updateRow(rowElement, formAnswer);
                 } 
             }
@@ -102,3 +107,20 @@ async function awaitBtnUpdateClicked() {
 }
 
 awaitBtnUpdateClicked();
+
+async function getFindRequest(){
+    while(true){
+        const request = await findForm.getFindDataPromise();
+        if (request !=refreshPressed){
+            const {field, value} = request;
+            const filteredData = filterByStr(employeeTable.getTableData(),field, value);
+            employeeTable.fillData(filteredData);
+        } else {
+            // refresh from DB
+            const employees = await action(companyService.getAllEmployees.bind(companyService));
+            employeeTable.fillData(employees);
+        }
+    }
+}
+
+getFindRequest();
