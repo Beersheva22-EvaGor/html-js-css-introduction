@@ -2,9 +2,7 @@ import { count } from "../util/number-functions.js";
 import { getRandomInt } from "../util/random.js";
 const minId = 100000;
 const maxId = 1000000;
-//TODO by using setTimeout update the CompanyService code that
-//each public method returns Promise that after some timeout moves
-//in the resolved state
+
 export default class CompanyService {
     #employees;
    
@@ -45,8 +43,13 @@ export default class CompanyService {
         return getPromise(Object.values(this.#employees), 5000)
     }
 
-    filterByField(field){
-        alarm(field);
+    removeEmployee(id){
+        return getPromise(delete this.#employees[id], 1000);
+    }
+
+    updateEmployee(employee){
+        this.#employees[employee.id] = {...employee};
+        return getPromise(this.#employees[employee.id], 150);
     }
 }
 function getPromise(state, timeout) {

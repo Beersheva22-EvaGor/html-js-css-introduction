@@ -1,8 +1,9 @@
+import { setOptionItems } from "../util/ui-functions.js";
 const FORM_ID = 'form-id';
-const DEPARTMENT_ID='department-id';
+const DEPARTMENT_ID = 'department-id';
 const NAME_ID = 'name-id';
 const BIRTH_YEAR_ID = 'birth-year-id';
-const SALARY_ID ='salary-id';
+const SALARY_ID = 'salary-id';
 const NOTIFICATION_ID = 'notification-id';
 const TEXT_INIT = 'Please fill the form';
 const TEXT_NAME_WRONG = "*Name must contain name and surname without numbers/symbols, starts with uppercase";
@@ -18,12 +19,12 @@ export default class EmployeeForm {
     constructor(parentId, paramObj) {   //paramObj={minAge, maxAge, minSalary, maxSalary, departments}
         this.#parentId = parentId;
         this.#fillForm(paramObj);
-        this.#dataObj = { };    //name: 'Vasya', department: 'QA', salary: 5000, birthYear: 2000 
+        this.#dataObj = {};    //name: 'Vasya', department: 'QA', salary: 5000, birthYear: 2000 
         this.#setElements();
         this.#setSelectOptions(paramObj);
         this.#setNameHandler();
     }
-    
+
     #fillForm(paramObj) {
         const parentElement = document.getElementById(this.#parentId);
         parentElement.innerHTML =
@@ -48,13 +49,11 @@ export default class EmployeeForm {
             <label for="${this.#parentId}-gender-male">male</label>
             </div>
             </div>
-            <button type="sumbit" class="submit-btn">Submit</button>
-
-            
+            <button type="sumbit" class="submit-btn">Submit</button>            
             </form>`;
 
     }
-    #setElements(){
+    #setElements() {
         this.#formElement = document.getElementById(`${this.#parentId}-${FORM_ID}`);
         this.#departmentElement = document.getElementById(`${this.#parentId}-${DEPARTMENT_ID}`);
         this.#nameElement = document.getElementById(`${this.#parentId}-${NAME_ID}`);
@@ -62,7 +61,7 @@ export default class EmployeeForm {
     }
 
     addHandler(submitFn) {
-        this.#formElement.onsubmit = async event=>{
+        this.#formElement.onsubmit = async event => {
             event.preventDefault();
             const formData = new FormData(this.#formElement);
             this.#dataObj.gender = formData.get('gender');
@@ -70,7 +69,7 @@ export default class EmployeeForm {
             this.#dataObj.salary = formData.get('salary');
             this.#dataObj.birthYear = formData.get('birth-year');
             this.#dataObj.department = formData.get('department');
-            if (checkName(this.#dataObj.name)){
+            if (checkName(this.#dataObj.name)) {
                 await submitFn(this.#dataObj);
                 this.#clearForm();
             } else {
@@ -78,45 +77,42 @@ export default class EmployeeForm {
             }
         };
     }
-    #setNameHandler(){
-        this.#nameElement.onclick = ()=> setStyleSpellCheckName(this.#nameElement, this.#notification, true);
+    #setNameHandler() {
+        this.#nameElement.onclick = () => setStyleSpellCheckName(this.#nameElement, this.#notification, true);
     }
     #setSelectOptions(paramObj) {
         setOptionItems(this.#departmentElement, paramObj.departments, 'Choose department');
     }
-    #clearForm(){
-        this.#dataObj={};
-        document.querySelectorAll('.form-control input').forEach(child =>{
-            if (child.name == 'gender'){
-                 child.checked = false;
+    #clearForm() {
+        this.#dataObj = {};
+        document.querySelectorAll('.form-control input').forEach(child => {
+            if (child.name == 'gender') {
+                child.checked = false;
             } else {
-                child.value='';
+                child.value = '';
             }
         });
 
-        this.#departmentElement.value='';
+        this.#departmentElement.value = '';
     }
 
 }
 
-function checkName(str){
-    return  /^[A-Z][^\d!@#\$%\^\&*\)\(+=._-]/.test(str);
+function checkName(str) {
+    const strArr = str.split(' ');
+    return strArr.length > 1 && strArr.reduce((accum, cur) => accum && /^[A-Z][^\d!@#\$%\^\&*\)\(+=._-]/.test(cur), true);
 }
 
-function setOptionItems(element, options, placeholder) {
-    element.innerHTML = `<option value hidden selected>--${placeholder}--</option>`;
-    element.innerHTML += options.map(o => `<option value="${o}">${o}</option>`).join('')
-}
-function setStyleSpellCheckName(nameElement, notification, isOk){
+function setStyleSpellCheckName(nameElement, notification, isOk) {
     let color = 'red';
     let fontStyle = 'italic';
     let message = TEXT_NAME_WRONG;
-    if (isOk){
+    if (isOk) {
         color = 'black';
         fontStyle = 'normal';
         message = TEXT_INIT;
     }
-    nameElement.style.borderColor =color;
+    nameElement.style.borderColor = color;
     notification.style.color = color;
     notification.style.fontStyle = fontStyle;
     notification.innerHTML = message;

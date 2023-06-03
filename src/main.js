@@ -1,16 +1,18 @@
-import CompanyService from "./service/CompanyService.js";
+import CompanyService from "./service/CompanyServiceREST.js";
 import ApplicationBar from "./ui/ApplicationBar.js";
-import DataGrid from "./ui/DataGrid.js";
+import FilteredDataGrid from "./ui/FilteredDataGrid.js";
 import EmployeeForm from "./ui/EmployeeForm.js";
 import { getRandomEmployee } from "./util/random.js";
 import statisticsConfig from "./config/statistics-config.json" assert{type: 'json'}
 import employeesConfig from "./config/employees-config.json" assert{type: 'json'}
 import { range } from "./util/number-functions.js";
 import Spinner from "./ui/Spinner.js";
+import EmployeeTableUpdate from "./ui/EmployeeTableUpdate.js";
 
 const N_EMPLOYEES = 50;
+const resultRemove = 'remove';
 const sections = [
-    { title: "Employees", id: "employees-table-place" },
+    { title: "Employees", id: "employees-table" },
     { title: "Add Employee", id: "employees-form-place" },
     { title: "Statistics", id: "statistics-place" }
 ];
@@ -35,15 +37,15 @@ const spinner = new Spinner('spinner-place');
 const menu = new ApplicationBar("menu-place", sections, menuHandler);
 const companyService = new CompanyService();
 const employeeForm = new EmployeeForm("employees-form-place", employeesConfig);
-const employeeTable = new DataGrid("employees-table-place", employeeColumns);
-const ageStatistics = new DataGrid("age-statistics-place", statisticsColumns);
-const salaryStatistics = new DataGrid("salary-statistics-place", statisticsColumns);
+const employeeTable = new FilteredDataGrid("employees-table-place", employeeColumns, true);
+const ageStatistics = new FilteredDataGrid("age-statistics-place", statisticsColumns, false);
+const salaryStatistics = new FilteredDataGrid("salary-statistics-place", statisticsColumns, false);
+const updateEmployees = new EmployeeTableUpdate("employees-update", employeesConfig);
 
 
 employeeForm.addHandler(async (employee) => {
     await action(companyService.addEmployee.bind(companyService, employee));
 })
-
 
 async function menuHandler(index) {
     switch (index) {
@@ -75,4 +77,28 @@ function createRandomEmployees() {
 
 action(createRandomEmployees);
 
-// employeeTableFilter('ID');
+async function awaitBtnUpdateClicked() {
+    while (true) {
+        const operation = await updateEmployees.handlerBtnClicked();
+        const tableReply = await employeeTable.getDataRow();
+        if (tableReply != undefined){
+            const { employee, rowElement } = tableReply;
+            // console.log(operation, employee);
+            if (operation == resultRemove) {
+                if (updateEmployees.actionRemove(employee)) {
+                    companyService.removeEmployee(employee.id);
+                    employeeTable.removeRow(rowElement);
+                }
+            } else {
+                let formAnswer = await updateEmployees.actionUpdate(employee);
+                if (formAnswer != false){
+                    companyService.updateEmployee(formAnswer);
+                    employeeTable.updateRow(rowElement, formAnswer);
+                } 
+            }
+        }
+    }
+
+}
+
+awaitBtnUpdateClicked();

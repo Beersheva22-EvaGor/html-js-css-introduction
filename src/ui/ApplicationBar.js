@@ -5,8 +5,6 @@ export default class ApplicationBar {
     #activeIndex
     #callbackFn
     constructor(parentId, sections, callbackFn) {
-        //sections - array of objects 
-        //each object {title: string, id: string}
         this.#callbackFn = callbackFn;
         this.#fillButtons(parentId, sections.map(s => s.title));
         this.#setSectionElements(sections.map(s => s.id));
