@@ -10,9 +10,12 @@ const refresh ='refresh';
 export default class FindForm {
     #promiseFindResult
     #objData
+    #valueToFind
+    #fieldToFind
     constructor(parentId, keys) {
         this.#objData = {};
         this.#createForm(parentId);
+        this.#setSelectors(parentId);
         this.#addHandler(parentId);
         this.#setSelectOptions(parentId, keys)
     }
@@ -38,8 +41,8 @@ export default class FindForm {
     #addHandlerSubmit(parentId) {
         document.getElementById(`${parentId}-${SUBMIT_BTN_ID}`).onclick = event => {
             event.preventDefault();
-            this.#objData['field'] = document.getElementById(`${parentId}-${KEY_ID}`).value;
-            this.#objData['value'] = document.getElementById(`${parentId}-${FIND_ID}`).value;
+            this.#objData['field'] = this.#fieldToFind.value;
+            this.#objData['value'] =this.#valueToFind.value;
             this.#promiseFindResult(this.#objData)
         }
     }
@@ -47,9 +50,15 @@ export default class FindForm {
         document.getElementById(`${parentId}-${REFRESH_BTN_ID}`).onclick = event => {
             event.preventDefault();
             this.#promiseFindResult(refresh);
+            this.#valueToFind.value = '';
+            this.#fieldToFind.selectedIndex= null;
         }
     }
 
+    #setSelectors(parentId){
+        this.#valueToFind  = document.getElementById(`${parentId}-${FIND_ID}`);
+        this.#fieldToFind = document.getElementById(`${parentId}-${KEY_ID}`)
+    }
     getFindDataPromise() {
         return new Promise(resolve => this.#promiseFindResult = resolve);
     }

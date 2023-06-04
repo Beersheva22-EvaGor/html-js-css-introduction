@@ -15,11 +15,11 @@ export default class Spinner {
         this.#coverElement = document.getElementById('cover');
     }
     start() {
-        document.getElementById('cover').hidden = false;
+        this.#coverElement.style.display = 'block';
         this.#spinnerElement.hidden = false;
     }
     stop() {
-        document.getElementById('cover').hidden = true;
+        this.#coverElement.style.display = 'none';
         this.#spinnerElement.hidden = true;
     }
 }

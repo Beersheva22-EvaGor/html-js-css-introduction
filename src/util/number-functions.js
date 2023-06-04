@@ -18,6 +18,7 @@ function compare(e1, e2, field, isAsc) {
 }
 
 export function filterByStr(obj, field, pattern){
-    return Object.values(obj).filter(o=> (o[field]+"").toLowerCase().includes(pattern.toLowerCase()));
+    pattern = pattern.toLowerCase().trim();
+    return Object.values(obj).filter(o=> (o[field]+"").toLowerCase().includes(pattern));
 }
 

@@ -1,7 +1,6 @@
 import DataGrid from "./DataGrid.js";
 import { orderObjByField } from "../util/number-functions.js";
 export default class FilteredDataGrid extends DataGrid {
-    #columns
     #objStoreData
     #keys
     constructor(parentId, columns, isFiltered) {
@@ -9,7 +8,6 @@ export default class FilteredDataGrid extends DataGrid {
         this.#objStoreData = {};
         this.#keys = columns.map(c => c.field);
 
-        this.#columns = columns;
         if (!isFiltered) {
             this.#setFilteredBtnsVisible(parentId, this.#keys);
         }

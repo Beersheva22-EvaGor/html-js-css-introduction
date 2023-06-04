@@ -75,12 +75,11 @@ async function action(serviceFn) {
 }
 
  //Add employees on start
-function createRandomEmployees() {
-    const promises = range(0, N_EMPLOYEES).map(() => companyService.addEmployee(getRandomEmployee(minSalary, maxSalary, minYear, maxYear, departments)));
-    return Promise.all(promises);
-}
-
-action(createRandomEmployees);
+// function createRandomEmployees() {
+//     const promises = range(0, N_EMPLOYEES).map(() => companyService.addEmployee(getRandomEmployee(minSalary, maxSalary, minYear, maxYear, departments)));
+//     return Promise.all(promises);
+// }
+// action(createRandomEmployees);
 
 async function awaitBtnUpdateClicked() {
     while (true) {
@@ -88,22 +87,22 @@ async function awaitBtnUpdateClicked() {
         const tableReply = await employeeTable.getDataRow();
         if (tableReply != undefined){
             const { employee, rowElement } = tableReply;
-            // console.log(operation, employee);
             if (operation == resultRemove) {
                 if (updateEmployees.actionRemove(employee)) {
-                    await action(companyService.removeEmployee.bind(companyService, employee.id));
+                    const dbResult = await action(companyService.removeEmployee.bind(companyService, employee.id));
+                    console.log(dbResult);
                     employeeTable.removeRow(rowElement);
                 }
             } else {
                 let formAnswer = await updateEmployees.actionUpdate(employee);
                 if (formAnswer != false){
-                    await action(companyService.updateEmployee.bind(companyService, formAnswer));
+                    const dbResult = await action(companyService.updateEmployee.bind(companyService, formAnswer));
+                    console.log(dbResult);
                     employeeTable.updateRow(rowElement, formAnswer);
                 } 
             }
         }
     }
-
 }
 
 awaitBtnUpdateClicked();

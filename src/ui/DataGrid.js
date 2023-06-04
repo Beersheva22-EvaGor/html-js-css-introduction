@@ -31,31 +31,39 @@ export default class DataGrid {
 
     #addHandlerCurrentRow(rowElement) {
         const dataRow = {};
-        const data = {};
-        rowElement.onclick = () => { 
+        let data = {};
+        rowElement.onclick = () => {
             const cells = rowElement.cells;
             this.#keys.forEach((key, index) => dataRow[key] = cells[index].innerHTML);
             data.employee = dataRow;
             data.rowElement = rowElement;
-            this.#selectRow(rowElement); 
-            this.#promiseResultData=data; 
+            const anotherSelected = this.#selectRow(rowElement);
+            this.#promiseResultData = data;
+            if (!anotherSelected) {
+                this.#promiseResultData = undefined;
+            }
         }
     }
 
-    getDataRow(){
+    getDataRow() {
         return new Promise(resolve => resolve(this.#promiseResultData));
     }
 
-    #selectRow(rowElement){
-       if (this.#selectedRow && this.#selectedRow != rowElement){
-        this.#selectedRow.classList.remove('selected');
-       }
-       this.#selectedRow = rowElement;
-        if (rowElement.classList.contains('selected')){
+    #selectRow(rowElement) {
+        let res = false;
+        if (!rowElement.classList.contains('selected') || this.#selectedRow != rowElement) {
+            res = true;
+        }
+        if (this.#selectedRow && this.#selectedRow != rowElement) {
+            this.#selectedRow.classList.remove('selected');
+        }
+        this.#selectedRow = rowElement;
+        if (rowElement.classList.contains('selected')) {
             rowElement.classList.remove('selected');
-        } else{
+        } else {
             rowElement.classList.add('selected');
         }
+        return res;
     }
 
     #buildTableHeader(parentId, columnNames) {
@@ -84,8 +92,8 @@ export default class DataGrid {
         this.#tBodyElement = document.getElementById(parentId + "-table");
     }
 
-    #getKeyByHeaderName(headerName){
-        return this.#columns.find(r=> r.headerName == headerName).field;
+    #getKeyByHeaderName(headerName) {
+        return this.#columns.find(r => r.headerName == headerName).field;
     }
 
     removeRow(rowElement) {
@@ -93,7 +101,7 @@ export default class DataGrid {
         this.#promiseResultData = undefined;
     }
 
-    updateRow(rowElement, newObj){
+    updateRow(rowElement, newObj) {
         rowElement.innerHTML = `${this.#keys.map(key => `<td>${newObj[key]}</td>`).join('')}`;
     }
 }
